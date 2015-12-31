@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		AFE7C79C1C3493EB00A95B77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C79B1C3493EB00A95B77 /* main.swift */; };
+		AFE7C7A91C34A85E00A95B77 /* XcodeProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C7A81C34A85E00A95B77 /* XcodeProjectTests.swift */; };
+		AFE7C7B01C34B26A00A95B77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C79B1C3493EB00A95B77 /* main.swift */; };
+		AFE7C7B41C34B65100A95B77 /* XcodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */; };
+		AFE7C7B51C34B65100A95B77 /* XcodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +29,21 @@
 /* Begin PBXFileReference section */
 		AFE7C7981C3493EB00A95B77 /* Parasol */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Parasol; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE7C79B1C3493EB00A95B77 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		AFE7C7A61C34A85E00A95B77 /* ParasolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParasolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFE7C7A81C34A85E00A95B77 /* XcodeProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeProjectTests.swift; sourceTree = "<group>"; };
+		AFE7C7AA1C34A85E00A95B77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeProject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AFE7C7951C3493EB00A95B77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFE7C7A31C34A85E00A95B77 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				AFE7C79A1C3493EB00A95B77 /* Parasol */,
+				AFE7C7A71C34A85E00A95B77 /* ParasolTests */,
 				AFE7C7991C3493EB00A95B77 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				AFE7C7981C3493EB00A95B77 /* Parasol */,
+				AFE7C7A61C34A85E00A95B77 /* ParasolTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,8 +75,18 @@
 			isa = PBXGroup;
 			children = (
 				AFE7C79B1C3493EB00A95B77 /* main.swift */,
+				AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */,
 			);
 			path = Parasol;
+			sourceTree = "<group>";
+		};
+		AFE7C7A71C34A85E00A95B77 /* ParasolTests */ = {
+			isa = PBXGroup;
+			children = (
+				AFE7C7A81C34A85E00A95B77 /* XcodeProjectTests.swift */,
+				AFE7C7AA1C34A85E00A95B77 /* Info.plist */,
+			);
+			path = ParasolTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +109,23 @@
 			productReference = AFE7C7981C3493EB00A95B77 /* Parasol */;
 			productType = "com.apple.product-type.tool";
 		};
+		AFE7C7A51C34A85E00A95B77 /* ParasolTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFE7C7AB1C34A85E00A95B77 /* Build configuration list for PBXNativeTarget "ParasolTests" */;
+			buildPhases = (
+				AFE7C7A21C34A85E00A95B77 /* Sources */,
+				AFE7C7A31C34A85E00A95B77 /* Frameworks */,
+				AFE7C7A41C34A85E00A95B77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ParasolTests;
+			productName = ParasolTests;
+			productReference = AFE7C7A61C34A85E00A95B77 /* ParasolTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -93,6 +137,9 @@
 				ORGANIZATIONNAME = "Loot Financial Services Ltd";
 				TargetAttributes = {
 					AFE7C7971C3493EB00A95B77 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					AFE7C7A51C34A85E00A95B77 = {
 						CreatedOnToolsVersion = 7.2;
 					};
 				};
@@ -110,9 +157,20 @@
 			projectRoot = "";
 			targets = (
 				AFE7C7971C3493EB00A95B77 /* Parasol */,
+				AFE7C7A51C34A85E00A95B77 /* ParasolTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AFE7C7A41C34A85E00A95B77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AFE7C7941C3493EB00A95B77 /* Sources */ = {
@@ -120,6 +178,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFE7C79C1C3493EB00A95B77 /* main.swift in Sources */,
+				AFE7C7B41C34B65100A95B77 /* XcodeProject.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFE7C7A21C34A85E00A95B77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFE7C7B51C34B65100A95B77 /* XcodeProject.swift in Sources */,
+				AFE7C7B01C34B26A00A95B77 /* main.swift in Sources */,
+				AFE7C7A91C34A85E00A95B77 /* XcodeProjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +278,7 @@
 		AFE7C7A01C3493EB00A95B77 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEFINES_MODULE = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -216,6 +286,29 @@
 		AFE7C7A11C3493EB00A95B77 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEFINES_MODULE = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		AFE7C7AC1C34A85E00A95B77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ParasolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.loot.ParasolTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AFE7C7AD1C34A85E00A95B77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ParasolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.loot.ParasolTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -237,6 +330,14 @@
 			buildConfigurations = (
 				AFE7C7A01C3493EB00A95B77 /* Debug */,
 				AFE7C7A11C3493EB00A95B77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AFE7C7AB1C34A85E00A95B77 /* Build configuration list for PBXNativeTarget "ParasolTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFE7C7AC1C34A85E00A95B77 /* Debug */,
+				AFE7C7AD1C34A85E00A95B77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
