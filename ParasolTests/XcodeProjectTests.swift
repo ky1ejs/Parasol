@@ -8,24 +8,20 @@
 
 import XCTest
 import Foundation
-//import Parasol
 @testable import Parasol
 
 class XcodeProjectTests: XCTestCase {
-    let xcodeProjName = "Test.xcodeproj"
-    let xcodeProjPath = "\(NSFileManager.defaultManager().currentDirectoryPath)/Test.xcodeproj"
-    
     override func setUp() {
         super.setUp()
-        NSFileManager.defaultManager().createFileAtPath(self.xcodeProjPath, contents: nil, attributes: nil)
-    }
-    
-    override func tearDown() {
-        _ = try? NSFileManager.defaultManager().removeItemAtPath(self.xcodeProjPath)
-        super.tearDown()
+        self.continueAfterFailure = true
     }
     
     func testXcodeProjectNameSearch() {
-        XCTAssertEqual(XcodeProject.xcodeProjectName(), self.xcodeProjName)
+        let fileManager = NSFileManager.defaultManager()
+        let xcodeProjName = "Test.xcodeproj"
+        let xcodeProjPath = "\(fileManager.currentDirectoryPath)/\(xcodeProjName)"
+        fileManager.createFileAtPath(xcodeProjPath, contents: nil, attributes: nil)
+        XCTAssertEqual(XcodeProject.xcodeProjectName(), xcodeProjName)
+        _ = try? NSFileManager.defaultManager().removeItemAtPath(xcodeProjPath)
     }
 }
