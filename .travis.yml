@@ -1,4 +1,4 @@
-language: swift
+language: objective-c
 xcode_project: Parasol.xcodeproj
 xcode_scheme: Parasol
 osx_image: xcode7.2
