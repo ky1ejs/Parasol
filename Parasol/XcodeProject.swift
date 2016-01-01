@@ -44,6 +44,7 @@ struct XcodeProject {
             for file in files {
                 if (file as NSString).pathExtension == "xcodeproj" {
                     xcodeProject = XcodeProject(name: file)
+                    break
                 }
             }
         } catch {
