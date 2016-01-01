@@ -22,3 +22,9 @@ xcuserdata
 *.hmap
 *.ipa
 
+## Carthage
+Carthage/Checkouts/
+Carthage/Build/iOS/
+Carthage/Build/watchOS/
+Carthage/Build/tvOS/
+

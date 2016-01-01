@@ -8,6 +8,7 @@
 
 import XCTest
 import Foundation
+import ZipArchive
 @testable import Parasol
 
 class XcodeProjectTests: XCTestCase {
@@ -17,11 +18,20 @@ class XcodeProjectTests: XCTestCase {
     }
     
     func testXcodeProjectNameSearch() {
-        let fileManager = NSFileManager.defaultManager()
-        let xcodeProjName = "Test.xcodeproj"
-        let xcodeProjPath = "\(fileManager.currentDirectoryPath)/\(xcodeProjName)"
-        fileManager.createFileAtPath(xcodeProjPath, contents: nil, attributes: nil)
-        XCTAssertNotNil(XcodeProject.findXcodeProjectInCurrentDirectory())
-        _ = try? NSFileManager.defaultManager().removeItemAtPath(xcodeProjPath)
+        let zipPath = NSBundle(forClass: self.dynamicType).pathForResource("ParasolTest", ofType: "zip")
+        _ = try? SSZipArchive.unzipFileAtPath(zipPath, toDestination: NSFileManager.defaultManager().currentDirectoryPath, overwrite: false, password: nil)
+        XcodeProject.fileManager.changeCurrentDirectoryPath("ParasolTest")
+        print(try? XcodeProject.fileManager.contentsOfDirectoryAtPath(XcodeProject.fileManager.currentDirectoryPath))
+        let testXcodeProjName = "Test.xcodeproj"
+        XcodeProject.fileManager.createFileAtPath(testXcodeProjName, contents: nil, attributes: nil)
+        let project = XcodeProject.findXcodeProjectInCurrentDirectory()
+        XCTAssertNotEqual(XcodeProject.findXcodeProjectInCurrentDirectory()?.name, testXcodeProjName)
+        XCTAssertEqual(project?.name, "Parasol.xcodeproj")
+        _ = try? XcodeProject.fileManager.removeItemAtPath(testXcodeProjName)
+        let aXcodeProjectName = "A.xcodeproj"
+        XcodeProject.fileManager.createFileAtPath(aXcodeProjectName, contents: nil, attributes: nil)
+        let aProject = XcodeProject.findXcodeProjectInCurrentDirectory()
+        XCTAssertEqual(aXcodeProjectName, aProject?.name)
+        _ = try? XcodeProject.fileManager.removeItemAtPath(aXcodeProjectName)
     }
 }
