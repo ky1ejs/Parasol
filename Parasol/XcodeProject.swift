@@ -9,6 +9,8 @@
 import Foundation
 
 struct XcodeProject {
+    static let fileManager = NSFileManager.defaultManager()
+    
     var name: String
     
     var tempDir: String? {
@@ -36,10 +38,9 @@ struct XcodeProject {
     }
     
     static func findXcodeProjectInCurrentDirectory() -> XcodeProject? {
-        let fileManager = NSFileManager.defaultManager()
         var xcodeProject: XcodeProject?
         do {
-            let files = try fileManager.contentsOfDirectoryAtPath(fileManager.currentDirectoryPath)
+            let files = try self.fileManager.contentsOfDirectoryAtPath(fileManager.currentDirectoryPath)
             for file in files {
                 if (file as NSString).pathExtension == "xcodeproj" {
                     xcodeProject = XcodeProject(name: file)
