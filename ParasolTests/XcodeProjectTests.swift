@@ -21,7 +21,7 @@ class XcodeProjectTests: XCTestCase {
         let xcodeProjName = "Test.xcodeproj"
         let xcodeProjPath = "\(fileManager.currentDirectoryPath)/\(xcodeProjName)"
         fileManager.createFileAtPath(xcodeProjPath, contents: nil, attributes: nil)
-        XCTAssertEqual(XcodeProject.xcodeProjectName(), xcodeProjName)
+        XCTAssertNotNil(XcodeProject.findXcodeProjectInCurrentDirectory())
         _ = try? NSFileManager.defaultManager().removeItemAtPath(xcodeProjPath)
     }
 }
