@@ -12,6 +12,8 @@
 		AFE7C7B01C34B26A00A95B77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C79B1C3493EB00A95B77 /* main.swift */; };
 		AFE7C7B41C34B65100A95B77 /* XcodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */; };
 		AFE7C7B51C34B65100A95B77 /* XcodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */; };
+		AFF759DD1C37091600F450AC /* ParasolTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = AFF759DC1C37091600F450AC /* ParasolTest.zip */; };
+		AFF75A561C37341B00F450AC /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF75A551C37341B00F450AC /* ZipArchive.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +35,8 @@
 		AFE7C7A81C34A85E00A95B77 /* XcodeProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeProjectTests.swift; sourceTree = "<group>"; };
 		AFE7C7AA1C34A85E00A95B77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeProject.swift; sourceTree = "<group>"; };
+		AFF759DC1C37091600F450AC /* ParasolTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = ParasolTest.zip; sourceTree = "<group>"; };
+		AFF75A551C37341B00F450AC /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = Carthage/Build/Mac/ZipArchive.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF75A561C37341B00F450AC /* ZipArchive.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +90,8 @@
 			children = (
 				AFE7C7A81C34A85E00A95B77 /* XcodeProjectTests.swift */,
 				AFE7C7AA1C34A85E00A95B77 /* Info.plist */,
+				AFF759DC1C37091600F450AC /* ParasolTest.zip */,
+				AFF75A551C37341B00F450AC /* ZipArchive.framework */,
 			);
 			path = ParasolTests;
 			sourceTree = "<group>";
@@ -116,6 +123,7 @@
 				AFE7C7A21C34A85E00A95B77 /* Sources */,
 				AFE7C7A31C34A85E00A95B77 /* Frameworks */,
 				AFE7C7A41C34A85E00A95B77 /* Resources */,
+				AFF75A1C1C37204500F450AC /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -167,10 +175,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF759DD1C37091600F450AC /* ParasolTest.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AFF75A1C1C37204500F450AC /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/ZipArchive.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AFE7C7941C3493EB00A95B77 /* Sources */ = {
@@ -295,6 +322,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = ParasolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.loot.ParasolTests;
@@ -306,6 +337,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = ParasolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.loot.ParasolTests;
@@ -332,6 +367,7 @@
 				AFE7C7A11C3493EB00A95B77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AFE7C7AB1C34A85E00A95B77 /* Build configuration list for PBXNativeTarget "ParasolTests" */ = {
 			isa = XCConfigurationList;
@@ -340,6 +376,7 @@
 				AFE7C7AD1C34A85E00A95B77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
