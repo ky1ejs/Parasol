@@ -15,16 +15,16 @@ class XcodeProjectTests: XCTestCase {
     override func setUp() {
         super.setUp()
         self.continueAfterFailure = true
-    }
-    
-    func testXcodeProjectNameSearch() {
+        
         // Unzip test Xcode project (Parasol.xcodeproj)
         let zipPath = NSBundle(forClass: self.dynamicType).pathForResource("ParasolTest", ofType: "zip")
         _ = try? SSZipArchive.unzipFileAtPath(zipPath, toDestination: NSFileManager.defaultManager().currentDirectoryPath, overwrite: false, password: nil)
         
         // Change working dir to see test Xcode project
         XcodeProject.fileManager.changeCurrentDirectoryPath("ParasolTest")
-        
+    }
+    
+    func testXcodeProjectNameSearch() {
         // Create project file that should not be found as P comes before T
         let testXcodeProjName = "Test.xcodeproj"
         XcodeProject.fileManager.createFileAtPath(testXcodeProjName, contents: nil, attributes: nil)
@@ -47,5 +47,13 @@ class XcodeProjectTests: XCTestCase {
         // Clean up
         _ = try? XcodeProject.fileManager.removeItemAtPath(testXcodeProjName)
         _ = try? XcodeProject.fileManager.removeItemAtPath(aXcodeProjectName)
+    }
+    
+    func testTempDirSearch() {
+        let project = XcodeProject.findXcodeProjectInCurrentDirectory()
+        XCTAssertNotNil(project?.tempDir)
+        if let tempDir = project?.tempDir {
+            XCTAssertTrue(NSFileManager.defaultManager().fileExistsAtPath(tempDir))
+        }
     }
 }
