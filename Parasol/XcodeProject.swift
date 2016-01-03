@@ -13,7 +13,7 @@ struct XcodeProject {
     
     var name: String
     
-    var tempDir: String? {
+    var buildSettings: String? {
         let task = NSTask()
         task.launchPath = "/usr/bin/xcodebuild" // TODO: make optional argument
         task.arguments = ["-project", self.name, "-scheme", "Parasol", "-showBuildSettings"]
@@ -21,20 +21,70 @@ struct XcodeProject {
         task.standardOutput = outputPipe
         task.launch()
         task.waitUntilExit()
-        
+        return String(data: outputPipe.fileHandleForReading.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)
+    }
+    
+    var tempDir: String? {
         var tempDirPath: String?
-        let outputData = outputPipe.fileHandleForReading.readDataToEndOfFile()
-        if let outputString = String(data: outputData, encoding: NSUTF8StringEncoding) {
-            let regex = try! NSRegularExpression(pattern: "^\\s*TEMP_ROOT = ", options: [])
-            outputString.enumerateLines({ (line, stop) -> () in
-                let mutableLine = NSMutableString(string: line)
-                if regex.replaceMatchesInString(mutableLine as NSMutableString, options: [], range: NSMakeRange(0, mutableLine.length), withTemplate: "") == 1 {
-                    tempDirPath = mutableLine as String
-                    stop = true
-                }
-            })
-        }
+        let regex = try! NSRegularExpression(pattern: "^\\s*TEMP_ROOT = ", options: [])
+        self.buildSettings?.enumerateLines({ (line, stop) -> () in
+            let mutableLine = NSMutableString(string: line)
+            if regex.replaceMatchesInString(mutableLine as NSMutableString, options: [], range: NSMakeRange(0, mutableLine.length), withTemplate: "") == 1 {
+                tempDirPath = mutableLine as String
+                stop = true
+            }
+        })
         return tempDirPath
+    }
+    
+    var executablePath: String? {
+        var executablePath: String?
+        let regex = try! NSRegularExpression(pattern: "^\\s*EXECUTABLE_PATH = ", options: [])
+        self.buildSettings?.enumerateLines({ (line, stop) -> () in
+            let mutableLine = NSMutableString(string: line)
+            if regex.replaceMatchesInString(mutableLine as NSMutableString, options: [], range: NSMakeRange(0, mutableLine.length), withTemplate: "") == 1 {
+                executablePath = mutableLine as String
+                stop = true
+            }
+        })
+        return executablePath
+    }
+    
+    var projectName: String? {
+        var projectName: String?
+        let regex = try! NSRegularExpression(pattern: "^\\s*PROJECT_NAME = ", options: [])
+        self.buildSettings?.enumerateLines({ (line, stop) -> () in
+            let mutableLine = NSMutableString(string: line)
+            if regex.replaceMatchesInString(mutableLine as NSMutableString, options: [], range: NSMakeRange(0, mutableLine.length), withTemplate: "") == 1 {
+                projectName = mutableLine as String
+                stop = true
+            }
+        })
+        return projectName
+    }
+    
+    var codeCoverageDir: String? {
+        var codeCoverageDir: String?
+        if let tempDir = self.tempDir, projectName = self.projectName {
+            codeCoverageDir = tempDir + "/CodeCoverage/\(projectName)"
+        }
+        return codeCoverageDir
+    }
+    
+    var coverageProfdataPath: String? {
+        var coverageProfdataPath: String?
+        if let codeCoverageDir = self.codeCoverageDir {
+            coverageProfdataPath = codeCoverageDir + "/Coverage.profdata"
+        }
+        return coverageProfdataPath
+    }
+    
+    var codeCoverageExecutablePath: String? {
+        var codeCoverageExecutablePath: String?
+        if let codeCoverageDir = self.codeCoverageDir, executablePath = self.executablePath {
+            codeCoverageExecutablePath = codeCoverageDir + "/Products/Debug/\(executablePath)"
+        }
+        return codeCoverageExecutablePath
     }
     
     static func findXcodeProjectInCurrentDirectory() -> XcodeProject? {
