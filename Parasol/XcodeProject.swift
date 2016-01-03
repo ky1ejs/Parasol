@@ -116,4 +116,14 @@ struct XcodeProject {
         }
         return .DoesNotExists
     }
+    
+    func runTests() {
+        let task = NSTask()
+        task.launchPath = "/usr/bin/xcodebuild"
+        task.arguments = ["test", "-project", self.name, "-scheme", "Parasol", "-enableCodeCoverage", "YES"]
+        task.standardOutput = NSPipe()
+        task.launch()
+        print("testing...")
+        task.waitUntilExit()
+    }
 }
