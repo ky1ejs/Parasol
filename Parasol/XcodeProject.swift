@@ -13,6 +13,22 @@ struct XcodeProject {
     
     var name: String
     
+    static func findXcodeProjectInCurrentDirectory() -> XcodeProject? {
+        var xcodeProject: XcodeProject?
+        do {
+            let files = try self.fileManager.contentsOfDirectoryAtPath(fileManager.currentDirectoryPath)
+            for file in files {
+                if (file as NSString).pathExtension == "xcodeproj" {
+                    xcodeProject = XcodeProject(name: file)
+                    break
+                }
+            }
+        } catch {
+            
+        }
+        return xcodeProject
+    }
+    
     var buildSettings: String? {
         let task = NSTask()
         task.launchPath = "/usr/bin/xcodebuild" // TODO: make optional argument
@@ -24,7 +40,7 @@ struct XcodeProject {
         return String(data: outputPipe.fileHandleForReading.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)
     }
     
-    var tempDir: String? {
+    var tempRoot: String? {
         var tempDirPath: String?
         let regex = try! NSRegularExpression(pattern: "^\\s*TEMP_ROOT = ", options: [])
         self.buildSettings?.enumerateLines({ (line, stop) -> () in
@@ -65,13 +81,13 @@ struct XcodeProject {
     
     var codeCoverageDir: String? {
         var codeCoverageDir: String?
-        if let tempDir = self.tempDir, projectName = self.projectName {
-            codeCoverageDir = tempDir + "/CodeCoverage/\(projectName)"
+        if let tempRoot = self.tempRoot, projectName = self.projectName {
+            codeCoverageDir = tempRoot + "/CodeCoverage/\(projectName)"
         }
         return codeCoverageDir
     }
     
-    var coverageProfdataPath: String? {
+    var codeCoverageProfdataPath: String? {
         var coverageProfdataPath: String?
         if let codeCoverageDir = self.codeCoverageDir {
             coverageProfdataPath = codeCoverageDir + "/Coverage.profdata"
@@ -87,19 +103,17 @@ struct XcodeProject {
         return codeCoverageExecutablePath
     }
     
-    static func findXcodeProjectInCurrentDirectory() -> XcodeProject? {
-        var xcodeProject: XcodeProject?
-        do {
-            let files = try self.fileManager.contentsOfDirectoryAtPath(fileManager.currentDirectoryPath)
-            for file in files {
-                if (file as NSString).pathExtension == "xcodeproj" {
-                    xcodeProject = XcodeProject(name: file)
-                    break
-                }
-            }
-        } catch {
-            
+    enum CoverageDataExistence {
+        case Exists(profdataPath: String, executablePath: String)
+        case DoesNotExists
+    }
+    
+    var coverageDataExists: CoverageDataExistence {
+        let fileManager = NSFileManager.defaultManager()
+        if let profdataPath = self.codeCoverageProfdataPath, executablePath = self.codeCoverageExecutablePath
+            where fileManager.fileExistsAtPath(profdataPath) && fileManager.fileExistsAtPath(executablePath) {
+                return .Exists(profdataPath: profdataPath, executablePath: executablePath)
         }
-        return xcodeProject
+        return .DoesNotExists
     }
 }

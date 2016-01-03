@@ -9,7 +9,6 @@
 import XCTest
 import Foundation
 import ZipArchive
-@testable import Parasol
 
 class XcodeProjectTests: XCTestCase {
     override func setUp() {
@@ -51,8 +50,8 @@ class XcodeProjectTests: XCTestCase {
     
     func testTempDirSearch() {
         let project = XcodeProject.findXcodeProjectInCurrentDirectory()
-        XCTAssertNotNil(project?.tempDir)
-        if let tempDir = project?.tempDir {
+        XCTAssertNotNil(project?.tempRoot)
+        if let tempDir = project?.tempRoot {
             XCTAssertTrue(NSFileManager.defaultManager().fileExistsAtPath(tempDir))
         }
     }
