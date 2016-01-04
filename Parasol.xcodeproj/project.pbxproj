@@ -18,15 +18,17 @@
 		AFF75A561C37341B00F450AC /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF75A551C37341B00F450AC /* ZipArchive.framework */; };
 		AFF8700C1C3B1DF200658254 /* Xcode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF8700B1C3B1DF200658254 /* Xcode.framework */; };
 		AFF8700D1C3B1DF200658254 /* Xcode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF8700B1C3B1DF200658254 /* Xcode.framework */; };
+		AFF870111C3B264A00658254 /* Xcode.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AFF8700B1C3B1DF200658254 /* Xcode.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		AFE7C7961C3493EB00A95B77 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 16;
 			files = (
+				AFF870111C3B264A00658254 /* Xcode.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -134,7 +136,6 @@
 				AFE7C7941C3493EB00A95B77 /* Sources */,
 				AFE7C7951C3493EB00A95B77 /* Frameworks */,
 				AFE7C7961C3493EB00A95B77 /* CopyFiles */,
-				AFF870101C3B22D000658254 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -218,21 +219,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/ZipArchive.framework",
-				"$(SRCROOT)/Carthage/Build/Mac/Xcode.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		AFF870101C3B22D000658254 /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/Xcode.framework",
 			);
 			name = Carthage;
