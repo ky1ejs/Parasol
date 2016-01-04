@@ -1,1 +1,2 @@
 github "LootApp/ZipArchive" "mac-target"
+github "LootApp/Xcode.swift" "feature/target-product-type"
