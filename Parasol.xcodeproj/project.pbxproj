@@ -134,6 +134,7 @@
 				AFE7C7941C3493EB00A95B77 /* Sources */,
 				AFE7C7951C3493EB00A95B77 /* Frameworks */,
 				AFE7C7961C3493EB00A95B77 /* CopyFiles */,
+				AFF870101C3B22D000658254 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -217,6 +218,22 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/Mac/ZipArchive.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Xcode.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		AFF870101C3B22D000658254 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/Xcode.framework",
 			);
 			name = Carthage;
 			outputPaths = (
