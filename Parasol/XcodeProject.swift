@@ -10,22 +10,27 @@ import Foundation
 import Xcode
 
 struct XcodeProject {
-    static let fileManager = NSFileManager.defaultManager()
+    let url: NSURL
+    var name: String { return self.url.lastPathComponent! }
+    var projectFile: XCProjectFile { return try! XCProjectFile(xcodeprojURL: self.url) }
     
-    var name: String
+    init?(url: NSURL) {
+        if let fileExtension = url.pathExtension where fileExtension == "xcodeproj" {
+            self.url = url
+            return
+        }
+        return nil
+    }
     
     static func findXcodeProjectInCurrentDirectory() -> XcodeProject? {
         var xcodeProject: XcodeProject?
-        do {
-            let files = try self.fileManager.contentsOfDirectoryAtPath(fileManager.currentDirectoryPath)
-            for file in files {
-                if (file as NSString).pathExtension == "xcodeproj" {
-                    xcodeProject = XcodeProject(name: file)
-                    break
-                }
+        let fileManager = NSFileManager.defaultManager()
+        let files = try! fileManager.contentsOfDirectoryAtPath(fileManager.currentDirectoryPath)
+        for file in files {
+            if let url = NSURL(string: file), foundProject = XcodeProject(url: url) {
+                xcodeProject = foundProject
+                break
             }
-        } catch {
-            
         }
         return xcodeProject
     }

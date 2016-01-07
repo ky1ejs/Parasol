@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF0032051C3D1E8E00158254 /* TestXcodeProjects.zip in Resources */ = {isa = PBXBuildFile; fileRef = AF0032041C3D1E8E00158254 /* TestXcodeProjects.zip */; };
 		AFE7C79C1C3493EB00A95B77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C79B1C3493EB00A95B77 /* main.swift */; };
 		AFE7C7A91C34A85E00A95B77 /* XcodeProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C7A81C34A85E00A95B77 /* XcodeProjectTests.swift */; };
 		AFE7C7B01C34B26A00A95B77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C79B1C3493EB00A95B77 /* main.swift */; };
@@ -14,7 +15,6 @@
 		AFE7C7B51C34B65100A95B77 /* XcodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */; };
 		AFF0F22F1C3992090083EDC2 /* Coverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF0F22E1C3992090083EDC2 /* Coverage.swift */; };
 		AFF0F2301C3992090083EDC2 /* Coverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF0F22E1C3992090083EDC2 /* Coverage.swift */; };
-		AFF759DD1C37091600F450AC /* ParasolTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = AFF759DC1C37091600F450AC /* ParasolTest.zip */; };
 		AFF75A561C37341B00F450AC /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF75A551C37341B00F450AC /* ZipArchive.framework */; };
 		AFF8700C1C3B1DF200658254 /* Xcode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF8700B1C3B1DF200658254 /* Xcode.framework */; };
 		AFF8700D1C3B1DF200658254 /* Xcode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF8700B1C3B1DF200658254 /* Xcode.framework */; };
@@ -35,14 +35,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AF0032041C3D1E8E00158254 /* TestXcodeProjects.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = TestXcodeProjects.zip; sourceTree = "<group>"; };
 		AFE7C7981C3493EB00A95B77 /* Parasol */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Parasol; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE7C79B1C3493EB00A95B77 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		AFE7C7A61C34A85E00A95B77 /* ParasolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParasolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE7C7A81C34A85E00A95B77 /* XcodeProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeProjectTests.swift; sourceTree = "<group>"; };
 		AFE7C7AA1C34A85E00A95B77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeProject.swift; sourceTree = "<group>"; };
+		AFE7C7B31C34B65100A95B77 /* XcodeProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = XcodeProject.swift; sourceTree = "<group>"; tabWidth = 4; };
 		AFF0F22E1C3992090083EDC2 /* Coverage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coverage.swift; sourceTree = "<group>"; };
-		AFF759DC1C37091600F450AC /* ParasolTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = ParasolTest.zip; sourceTree = "<group>"; };
 		AFF75A551C37341B00F450AC /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZipArchive.framework; path = Carthage/Build/Mac/ZipArchive.framework; sourceTree = SOURCE_ROOT; };
 		AFF8700B1C3B1DF200658254 /* Xcode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Xcode.framework; path = Carthage/Build/Mac/Xcode.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -102,7 +102,7 @@
 			children = (
 				AFE7C7A81C34A85E00A95B77 /* XcodeProjectTests.swift */,
 				AFE7C7AA1C34A85E00A95B77 /* Info.plist */,
-				AFF759DC1C37091600F450AC /* ParasolTest.zip */,
+				AF0032041C3D1E8E00158254 /* TestXcodeProjects.zip */,
 				AFF8700E1C3B1F8200658254 /* Frameworks */,
 			);
 			path = ParasolTests;
@@ -205,7 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFF759DD1C37091600F450AC /* ParasolTest.zip in Resources */,
+				AF0032051C3D1E8E00158254 /* TestXcodeProjects.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

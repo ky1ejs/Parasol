@@ -15,37 +15,48 @@ class XcodeProjectTests: XCTestCase {
         super.setUp()
         self.continueAfterFailure = true
         
+        let fileManager = NSFileManager.defaultManager()
+        
         // Unzip test Xcode project (Parasol.xcodeproj)
-        let zipPath = NSBundle(forClass: self.dynamicType).pathForResource("ParasolTest", ofType: "zip")
-        _ = try? SSZipArchive.unzipFileAtPath(zipPath, toDestination: NSFileManager.defaultManager().currentDirectoryPath, overwrite: false, password: nil)
+        let zipPath = NSBundle(forClass: self.dynamicType).pathForResource("TestXcodeProjects", ofType: "zip")
+        _ = try! SSZipArchive.unzipFileAtPath(zipPath, toDestination: fileManager.currentDirectoryPath, overwrite: false, password: nil)
         
         // Change working dir to see test Xcode project
-        XcodeProject.fileManager.changeCurrentDirectoryPath("ParasolTest")
+        _ = try? fileManager.moveItemAtPath(fileManager.currentDirectoryPath + "/TestXcodeProjects/CommandLineTest/CommandLineTest.xcodeproj", toPath: fileManager.currentDirectoryPath + "/CommandLineTest.xcodeproj")
+    }
+    
+    override func tearDown() {
+        let fileManager = NSFileManager()
+        try! fileManager.removeItemAtPath(fileManager.currentDirectoryPath + "/CommandLineTest.xcodeproj")
+        try! fileManager.removeItemAtPath(fileManager.currentDirectoryPath + "/TestXcodeProjects")
+        super.tearDown()
     }
     
     func testXcodeProjectNameSearch() {
+        let fileManager = NSFileManager.defaultManager()
+        
         // Create project file that should not be found as P comes before T
         let testXcodeProjName = "Test.xcodeproj"
-        XcodeProject.fileManager.createFileAtPath(testXcodeProjName, contents: nil, attributes: nil)
+        fileManager.createFileAtPath(testXcodeProjName, contents: nil, attributes: nil)
         
         // Search for Xcode project
         let project = XcodeProject.findXcodeProjectInCurrentDirectory()
         
         // Assert that its not Test.xcodeproj file we made
-        XCTAssertNotEqual(XcodeProject.findXcodeProjectInCurrentDirectory()?.name, testXcodeProjName)
-        XCTAssertEqual(project?.name, "Parasol.xcodeproj")
+        XCTAssertNotEqual(project?.name, testXcodeProjName)
+        XCTAssertEqual(project?.name, "CommandLineTest.xcodeproj")
         
         // Create project that should come before P
         let aXcodeProjectName = "A.xcodeproj"
-        XcodeProject.fileManager.createFileAtPath(aXcodeProjectName, contents: nil, attributes: nil)
+        fileManager.createFileAtPath(aXcodeProjectName, contents: nil, attributes: nil)
         
         // Make sure that A.xcodeproj is found before P
         let aProject = XcodeProject.findXcodeProjectInCurrentDirectory()
         XCTAssertEqual(aXcodeProjectName, aProject?.name)
         
         // Clean up
-        _ = try? XcodeProject.fileManager.removeItemAtPath(testXcodeProjName)
-        _ = try? XcodeProject.fileManager.removeItemAtPath(aXcodeProjectName)
+        _ = try? fileManager.removeItemAtPath(testXcodeProjName)
+        _ = try? fileManager.removeItemAtPath(aXcodeProjectName)
     }
     
     func testTempDirSearch() {
