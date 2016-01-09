@@ -9,41 +9,59 @@
 import Foundation
 import Xcode
 
-struct XcodeProject {
-    let url: NSURL
-    var name: String { return self.url.lastPathComponent! }
-    var projectFile: XCProjectFile { return try! XCProjectFile(xcodeprojURL: self.url) }
-    
-    init?(url: NSURL) {
-        if let fileExtension = url.pathExtension where fileExtension == "xcodeproj" {
-            self.url = url
-            return
-        }
-        return nil
-    }
-    
-    static func findXcodeProjectInCurrentDirectory() -> XcodeProject? {
-        var xcodeProject: XcodeProject?
-        let fileManager = NSFileManager.defaultManager()
-        let files = try! fileManager.contentsOfDirectoryAtPath(fileManager.currentDirectoryPath)
-        for file in files {
-            if let url = NSURL(string: file), foundProject = XcodeProject(url: url) {
-                xcodeProject = foundProject
-                break
-            }
-        }
-        return xcodeProject
-    }
-    
-    var buildSettings: String? {
+struct XcodeBuild {
+    static func buildSettingsForXcodeProject(projectPath: String, schemeName: String?) -> String? {
         let task = NSTask()
         task.launchPath = "/usr/bin/xcodebuild" // TODO: make optional argument
-        task.arguments = ["-project", self.name, "-scheme", "Parasol", "-showBuildSettings"]
+        var arguments = ["-project", projectPath]
+        if let scheme = schemeName {
+            arguments += ["-scheme", scheme]
+        }
+        arguments.append("-showBuildSettings")
+        task.arguments = arguments
         let outputPipe = NSPipe()
         task.standardOutput = outputPipe
         task.launch()
         task.waitUntilExit()
         return String(data: outputPipe.fileHandleForReading.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)
+    }
+}
+
+struct XcodeProject {
+    static let fileManager = NSFileManager()
+    
+    let url: NSURL
+    let name: String
+    var projectFile: XCProjectFile { return try! XCProjectFile(xcodeprojURL: self.url) }
+    
+    init?(url: NSURL) {
+        var projectName: String?
+        let regex = try! NSRegularExpression(pattern: "^\\s*PROJECT_NAME = ", options: [])
+        XcodeBuild.buildSettingsForXcodeProject(url.absoluteString, schemeName: nil)?.enumerateLines { (line, stop) -> () in
+            let mutableLine = NSMutableString(string: line)
+            if regex.replaceMatchesInString(mutableLine as NSMutableString, options: [], range: NSMakeRange(0, mutableLine.length), withTemplate: "") == 1 {
+                projectName = mutableLine as String
+                stop = true
+            }
+        }
+        if let projectName = projectName {
+            self.url = url
+            self.name = projectName
+            return
+        }
+        return nil
+    }
+    
+    var targets: [Target] {
+        var targets = [Target]()
+        for target in self.projectFile.project.targets {
+            targets.append(Target(project: self, targetFile: target))
+        }
+        return targets
+    }
+    
+    var buildSettings: String? {
+        return XcodeBuild.buildSettingsForXcodeProject(self.url.lastPathComponent!, schemeName: nil)
     }
     
     var tempRoot: String? {
@@ -59,6 +77,28 @@ struct XcodeProject {
         return tempDirPath
     }
     
+    static func findXcodeProjectInCurrentDirectory() -> XcodeProject? {
+        var xcodeProject: XcodeProject?
+        let files = try! self.fileManager.contentsOfDirectoryAtPath(fileManager.currentDirectoryPath)
+        for file in files {
+            if let url = NSURL(string: file), foundProject = XcodeProject(url: url) {
+                xcodeProject = foundProject
+                break
+            }
+        }
+        return xcodeProject
+    }
+}
+
+struct Target {
+    var name: String { return self.targetFile.name }
+    var project: XcodeProject
+    let targetFile: PBXTarget
+    
+    var buildSettings: String? {
+        return XcodeBuild.buildSettingsForXcodeProject(self.project.url.lastPathComponent!, schemeName: self.name)
+    }
+    
     var executablePath: String? {
         var executablePath: String?
         let regex = try! NSRegularExpression(pattern: "^\\s*EXECUTABLE_PATH = ", options: [])
@@ -72,23 +112,10 @@ struct XcodeProject {
         return executablePath
     }
     
-    var projectName: String? {
-        var projectName: String?
-        let regex = try! NSRegularExpression(pattern: "^\\s*PROJECT_NAME = ", options: [])
-        self.buildSettings?.enumerateLines({ (line, stop) -> () in
-            let mutableLine = NSMutableString(string: line)
-            if regex.replaceMatchesInString(mutableLine as NSMutableString, options: [], range: NSMakeRange(0, mutableLine.length), withTemplate: "") == 1 {
-                projectName = mutableLine as String
-                stop = true
-            }
-        })
-        return projectName
-    }
-    
     var codeCoverageDir: String? {
         var codeCoverageDir: String?
-        if let tempRoot = self.tempRoot, projectName = self.projectName {
-            codeCoverageDir = tempRoot + "/CodeCoverage/\(projectName)"
+        if let tempRoot = self.project.tempRoot {
+            codeCoverageDir = tempRoot + "/CodeCoverage/\(self.project.name)"
         }
         return codeCoverageDir
     }
@@ -132,4 +159,5 @@ struct XcodeProject {
         print("testing...")
         task.waitUntilExit()
     }
+
 }
