@@ -13,7 +13,7 @@ if let xcodeProject = XcodeProject.findXcodeProjectInCurrentDirectory() {
     let targets = xcodeProject.targets
     print("Which target in \(xcodeProject.name):")
     for i in 1...targets.count {
-        print("\(i)) \(targets[i].name)")
+        print("\(i)) \(targets[i - 1].name)")
     }
     let input = readLine()
     if let input = input, index = Int(input) where index - 1 >= 0 && index <= targets.count  {
