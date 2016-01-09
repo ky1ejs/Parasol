@@ -65,4 +65,8 @@ class XcodeProjectTests: XCTestCase {
             XCTAssertTrue(NSFileManager.defaultManager().fileExistsAtPath(tempDir))
         }
     }
+    
+    func testTargets() {
+        XCTAssertNotNil(XcodeProject.findXcodeProjectInCurrentDirectory()?.targets)
+    }
 }

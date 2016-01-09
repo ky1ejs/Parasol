@@ -19,7 +19,7 @@ struct XcodeProject {
     init?(url: NSURL) {
         var projectName: String?
         let regex = try! NSRegularExpression(pattern: "^\\s*PROJECT_NAME = ", options: [])
-        XcodeBuild.buildSettingsForXcodeProject(url.absoluteString, schemeName: nil)?.enumerateLines { (line, stop) -> () in
+        XcodeBuild.buildSettingsForXcodeProject(url.path!, schemeName: nil)?.enumerateLines { (line, stop) -> () in
             let mutableLine = NSMutableString(string: line)
             if regex.replaceMatchesInString(mutableLine as NSMutableString, options: [], range: NSMakeRange(0, mutableLine.length), withTemplate: "") == 1 {
                 projectName = mutableLine as String
@@ -61,9 +61,9 @@ struct XcodeProject {
     
     static func findXcodeProjectInCurrentDirectory() -> XcodeProject? {
         var xcodeProject: XcodeProject?
-        let files = try! self.fileManager.contentsOfDirectoryAtPath(fileManager.currentDirectoryPath)
-        for file in files {
-            if let url = NSURL(string: file), foundProject = XcodeProject(url: url) {
+        let urls = try! self.fileManager.contentsOfDirectoryAtURL(NSURL(string: self.fileManager.currentDirectoryPath)!, includingPropertiesForKeys: nil, options: [])
+        for url in urls {
+            if let foundProject = XcodeProject(url: url) {
                 xcodeProject = foundProject
                 break
             }
