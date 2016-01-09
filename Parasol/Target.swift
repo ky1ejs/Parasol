@@ -31,6 +31,8 @@ struct Target {
         return executablePath
     }
     
+    
+    // MARK: Code coverage
     var codeCoverageDir: String? {
         var codeCoverageDir: String?
         if let tempRoot = self.project.tempRoot {
