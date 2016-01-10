@@ -17,7 +17,7 @@ if let xcodeProject = XcodeProject.findXcodeProjectInCurrentDirectory() {
     }
     let input = readLine()
     if let input = input, index = Int(input) where index - 1 >= 0 && index <= targets.count  {
-        let target = targets[index]
+        let target = targets[index - 1]
         if case let .Exists(profdataPath, executablePath) = target.coverageDataExists {
             Coverage.showCoverage(profdataPath, executablePath: executablePath)
         } else {
