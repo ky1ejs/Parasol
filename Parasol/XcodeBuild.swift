@@ -21,6 +21,7 @@ struct XcodeBuild {
         arguments.append("-showBuildSettings")
         task.arguments = arguments
         let outputPipe = NSPipe()
+        task.standardError = NSPipe() // Don't print errors
         task.standardOutput = outputPipe
         task.launch()
         task.waitUntilExit()
