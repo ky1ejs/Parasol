@@ -32,7 +32,7 @@ struct XcodeBuild {
         task.launchPath = self.xcodeBuildPath
         var arguments = ["test", "-project", projectPath]
         if let schemeName = schemeName {
-            arguments.append(schemeName)
+            arguments += ["-scheme", schemeName]
         }
         arguments += ["-enableCodeCoverage", "YES"]
         task.arguments = arguments
