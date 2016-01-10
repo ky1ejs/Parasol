@@ -28,8 +28,8 @@ class XcodeProjectTests: XCTestCase {
     override func tearDown() {
         let fileManager = NSFileManager.defaultManager()
         let currentDirURL = NSURL(string: fileManager.currentDirectoryPath)!
-        fileManager.changeCurrentDirectoryPath(currentDirURL.URLByDeletingLastPathComponent!.absoluteString)
-        try! fileManager.removeItemAtPath(currentDirURL.absoluteString)
+        fileManager.changeCurrentDirectoryPath(currentDirURL.URLByDeletingLastPathComponent!.path!)
+        try! fileManager.removeItemAtPath(currentDirURL.path!)
         super.tearDown()
     }
     

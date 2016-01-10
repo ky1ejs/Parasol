@@ -15,7 +15,7 @@ struct Target {
     let targetFile: PBXTarget
     
     var buildSettings: String? {
-        return XcodeBuild.buildSettingsForXcodeProject(self.project.url.lastPathComponent!, schemeName: self.name)
+        return XcodeBuild.buildSettingsForXcodeProject(self.project.url.path!, schemeName: self.name)
     }
     
     var executablePath: String? {
@@ -72,6 +72,6 @@ struct Target {
     }
     
     func runTests() {
-        XcodeBuild.runTestsForXcodeProject(self.project.url.absoluteString, schemeName: self.name)
+        XcodeBuild.runTestsForXcodeProject(self.project.url.path!, schemeName: self.name)
     }
 }

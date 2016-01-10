@@ -43,7 +43,7 @@ struct XcodeProject {
     }
     
     var buildSettings: String? {
-        return XcodeBuild.buildSettingsForXcodeProject(self.url.lastPathComponent!, schemeName: nil)
+        return XcodeBuild.buildSettingsForXcodeProject(self.url.path!, schemeName: nil)
     }
     
     var tempRoot: String? {
