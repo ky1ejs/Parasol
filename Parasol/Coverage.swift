@@ -11,6 +11,14 @@ import Foundation
 struct Coverage {
     let lines: [String]
     
+    init(coverageReport: String) throws {
+        var lines = [String]()
+        coverageReport.enumerateLines { (line, stop) -> () in
+            lines.append(line)
+        }
+        self.lines = lines
+    }
+    
     static func showCoverage(profdataPath: String, executablePath: String) {
         let task = NSTask()
         task.launchPath = "/usr/bin/xcrun"
@@ -22,16 +30,12 @@ struct Coverage {
     static func showCoverageReport(profdataPath: String, executablePath: String) -> Coverage {
         let task = NSTask()
         task.launchPath = "/usr/bin/xcrun"
-        task.arguments = ["llvm-cov", "report", "-filename-equivalence", "-instr-profile", profdataPath, executablePath]
+        task.arguments = ["llvm-cov", "report", "-instr-profile", profdataPath, executablePath]
         let outPipe = NSPipe()
         task.standardOutput = outPipe
         task.launch()
         task.waitUntilExit()
         let report = String(data: outPipe.fileHandleForReading.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)!
-        var lines = [String]()
-        report.enumerateLines { (line, stop) -> () in
-            lines.append(line)
-        }
-        return Coverage(lines: lines)
+        return try! Coverage(coverageReport: report)
     }
 }
