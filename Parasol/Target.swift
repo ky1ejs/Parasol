@@ -36,7 +36,7 @@ struct Target {
     var codeCoverageDir: String? {
         var codeCoverageDir: String?
         if let tempRoot = self.project.tempRoot {
-            codeCoverageDir = tempRoot + "/CodeCoverage/\(self.project.name)"
+            codeCoverageDir = tempRoot + "/CodeCoverage/\(self.name)"
         }
         return codeCoverageDir
     }
@@ -52,7 +52,12 @@ struct Target {
     var codeCoverageExecutablePath: String? {
         var codeCoverageExecutablePath: String?
         if let codeCoverageDir = self.codeCoverageDir, executablePath = self.executablePath {
-            codeCoverageExecutablePath = codeCoverageDir + "/Products/Debug/\(executablePath)"
+            switch self.targetFile.productType {
+            case .CommandLineTool:
+                codeCoverageExecutablePath = "\(codeCoverageDir)/Products/Debug/\(self.name)Tests.xctest/Contents/MacOS/\(self.name)Tests"
+            default:
+                codeCoverageExecutablePath = "\(codeCoverageDir)/Products/Debug/\(executablePath)"
+            }
         }
         return codeCoverageExecutablePath
     }
