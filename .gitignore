@@ -1,3 +1,5 @@
+.DS_Store
+
 ## Build generated
 /build/
 DerivedData
@@ -24,8 +26,5 @@ xcuserdata
 *.ipa
 
 ## Carthage
-Carthage/Checkouts/
-Carthage/Build/iOS/
-Carthage/Build/watchOS/
-Carthage/Build/tvOS/
+Carthage/
 
