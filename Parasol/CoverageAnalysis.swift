@@ -9,13 +9,28 @@
 import Foundation
 
 struct CoverageAnalysis {
-    let lines: [String]
+    let files: [CoverageFile]
     init(profdataPath: String, executablePath: String) throws {
         let coverageReportString = try XCRun.coverageWithFormat(.Analysis, profdataPath: profdataPath, executablePath: executablePath)
+        var files = [CoverageFile]()
+        var path: String?
         var lines = [String]()
         coverageReportString.enumerateLines { (line, stop) -> () in
-            lines.append(line)
+            if line.characters.first == "/" {
+                if let path = path {
+                    files.append(CoverageFile(path: path, allLines: lines))
+                }
+                path = line
+                lines = [String]()
+            } else {
+                lines.append(line)
+            }
         }
-        self.lines = lines
+        self.files = files
     }
+}
+
+struct CoverageFile {
+    let path: String
+    let allLines: [String]
 }

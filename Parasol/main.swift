@@ -19,7 +19,7 @@ if let xcodeProject = XcodeProject.findXcodeProjectInCurrentDirectory() {
     if let input = input, index = Int(input) where index - 1 >= 0 && index <= targets.count  {
         let target = targets[index - 1]
         if case let .Exists(profdataPath, executablePath) = target.coverageDataExists {
-            if let lines = try? CoverageAnalysis(profdataPath: profdataPath, executablePath: executablePath).lines {
+            if let lines = try? CoverageAnalysis(profdataPath: profdataPath, executablePath: executablePath).files[0].allLines {
                 for line in lines {
                     print(line)
                 }
@@ -30,7 +30,7 @@ if let xcodeProject = XcodeProject.findXcodeProjectInCurrentDirectory() {
             if input == "y" {
                 target.runTests()
                 if case let .Exists(profdataPath, executablePath) = target.coverageDataExists {
-                    if let lines = try? CoverageAnalysis(profdataPath: profdataPath, executablePath: executablePath).lines {
+                    if let lines = try? CoverageAnalysis(profdataPath: profdataPath, executablePath: executablePath).files[0].allLines {
                         for line in lines {
                             print(line)
                         }
