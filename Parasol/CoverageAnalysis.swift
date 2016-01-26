@@ -15,13 +15,15 @@ struct CoverageAnalysis {
         var files = [CoverageFile]()
         var path: String?
         var lines = [String]()
+        let whiteSpaceRegex = try! NSRegularExpression(pattern: "^\\s*$", options: [])
         coverageReportString.enumerateLines { (line, stop) -> () in
             if line.characters.first == "/" {
+                path = line
+                lines = [String]()
+            } else if whiteSpaceRegex.matchesInString(line, options: [], range: NSMakeRange(0, line.characters.count)).count > 0 {
                 if let path = path {
                     files.append(CoverageFile(path: path, allLines: lines))
                 }
-                path = line
-                lines = [String]()
             } else {
                 lines.append(line)
             }
