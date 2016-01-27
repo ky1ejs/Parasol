@@ -10,6 +10,16 @@ import Foundation
 
 struct CoverageAnalysis {
     let files: [CoverageFile]
+    var coverage: Float {
+        var testableLines: Float = 0
+        var testedLines: Float = 0
+        for file in files {
+            testableLines += Float(file.testableLines.count)
+            testedLines += Float(file.testedLines.count)
+        }
+        return (testedLines / testableLines) * 100
+    }
+    
     init(profdataPath: String, executablePath: String) throws {
         let coverageReportString = try XCRun.coverageWithFormat(.Analysis, profdataPath: profdataPath, executablePath: executablePath)
         var files = [CoverageFile]()

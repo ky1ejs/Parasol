@@ -19,12 +19,20 @@ if let xcodeProject = XcodeProject.findXcodeProjectInCurrentDirectory() {
     if let input = input, index = Int(input) where index - 1 >= 0 && index <= targets.count  {
         let target = targets[index - 1]
         if case let .Exists(profdataPath, executablePath) = target.coverageDataExists {
-            if let files = try? CoverageAnalysis(profdataPath: profdataPath, executablePath: executablePath).files {
-                for file in files {
+            if Process.arguments.contains("report") {
+                if let report = try? CoverageReport(profdataPath: profdataPath, executablePath: executablePath) {
+                    for line in report.lines {
+                        print(line)
+                    }
+                }
+            }
+            if let analysis = try? CoverageAnalysis(profdataPath: profdataPath, executablePath: executablePath) {
+                for file in analysis.files {
                     print(file.path)
                     print(file.coverage)
                     print("------------")
                 }
+                print(analysis.coverage)
             }
         } else {
             print("Coverage data has not been generated. Would you like to run tests? (y/n)")
