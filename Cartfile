@@ -1,2 +1,2 @@
-github "ZipArchive/ZipArchive" "master"
+github "ZipArchive/ZipArchive"
 github "LootApp/Xcode.swift" "feature/target-product-type"
