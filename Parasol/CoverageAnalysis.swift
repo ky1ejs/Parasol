@@ -31,8 +31,8 @@ struct CoverageAnalysis {
                 path = line
                 lines = [String]()
             } else if whiteSpaceRegex.matchesInString(line, options: [], range: NSMakeRange(0, line.characters.count)).count > 0 {
-                if let path = path {
-                    files.append(CoverageFile(path: path, allLines: lines))
+                if let path = path, file = CoverageFile(path: path, allLines: lines) {
+                    files.append(file)
                 }
             } else {
                 lines.append(line)
@@ -49,7 +49,11 @@ struct CoverageFile {
     let testedLines: [String]
     var coverage: Float { return (Float(self.testedLines.count) / Float(self.testableLines.count)) * 100 }
     
-    init(path: String, allLines: [String]) {
+    init?(path: String, allLines: [String]) {
+        let testFileRegex = try! NSRegularExpression(pattern: "^*Tests.*$", options: [])
+        guard testFileRegex.matchesInString(path, options: [], range: NSMakeRange(0, path.characters.count)).count == 0 else {
+            return nil
+        }
         let coverageRegex = try! NSRegularExpression(pattern: "^\\s+\\d", options: [])
         var testableLines = [String]()
         var testedLines = [String]()
