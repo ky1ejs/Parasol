@@ -21,7 +21,7 @@ class XcodeBuildTests: XCTestCase {
         super.tearDown()
     }
     
-    func testRunTests() {
+    func testRunTestsAndGetCoverage() {
         let project = XcodeProject.findXcodeProjectInCurrentDirectory()
         XCTAssertNotNil(project)
         var testTarget: Target?
@@ -41,5 +41,11 @@ class XcodeBuildTests: XCTestCase {
         XCTAssertTrue(NSFileManager.defaultManager().fileExistsAtPath(coverageDir!))
     }
     
+    func testBuildSettings() {
+        let project = XcodeProject.findXcodeProjectInCurrentDirectory()
+        XCTAssertNotNil(project)
+        let settings = XcodeBuild.buildSettingsForXcodeProject(project!.url.path!, schemeName: project?.targets.first?.name)
+        XCTAssertNotNil(settings)
+    }
     
 }
