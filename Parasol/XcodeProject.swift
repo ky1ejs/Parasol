@@ -70,4 +70,12 @@ struct XcodeProject {
         }
         return xcodeProject
     }
+    
+    func runTests() {
+        self.runTestsForScheme(nil)
+    }
+    
+    func runTestsForScheme(scheme: String?) {
+        XcodeBuild.runTestsForXcodeProject(self.url.path!, schemeName: scheme)
+    }
 }
