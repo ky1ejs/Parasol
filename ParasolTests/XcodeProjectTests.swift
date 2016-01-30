@@ -29,8 +29,11 @@ class XcodeProjectTests: XCTestCase {
         let testXcodeProjName = "Test.xcodeproj"
         fileManager.createFileAtPath(testXcodeProjName, contents: nil, attributes: nil)
         
+        var project: XcodeProject?
         // Search for Xcode project
-        let project = XcodeProject.findXcodeProjectInCurrentDirectory()
+        self.measureBlock { () -> Void in
+            project = XcodeProject.findXcodeProjectInCurrentDirectory()
+        }
         
         // Assert that its not Test.xcodeproj file we made
         XCTAssertNotEqual(project?.url.lastPathComponent, testXcodeProjName)

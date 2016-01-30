@@ -62,7 +62,7 @@ struct XcodeProject {
     static func findXcodeProjectInCurrentDirectory() -> XcodeProject? {
         var xcodeProject: XcodeProject?
         let urls = try! self.fileManager.contentsOfDirectoryAtURL(NSURL(string: self.fileManager.currentDirectoryPath)!, includingPropertiesForKeys: nil, options: [])
-        for url in urls {
+        for url in urls where (url.lastPathComponent! as NSString).pathExtension == "xcodeproj" {
             if let foundProject = XcodeProject(url: url) {
                 xcodeProject = foundProject
                 break
