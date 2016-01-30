@@ -22,7 +22,6 @@ class XcodeBuildTests: XCTestCase {
     }
     
     func testRunTests() {
-        XcodeBuild.runTestsForXcodeProject("CommandLineTest.xcodeproj", schemeName: "CommandLineTest")
         let project = XcodeProject.findXcodeProjectInCurrentDirectory()
         XCTAssertNotNil(project)
         var testTarget: Target?

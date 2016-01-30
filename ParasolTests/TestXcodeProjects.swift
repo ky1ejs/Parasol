@@ -10,6 +10,9 @@ import Foundation
 import ZipArchive
 
 class TestXcodeProjects {
+    static let mainProjectPath = NSURL(string: "CommandLineTest.xcodeproj")!
+    static let secondProjectPath = NSURL(string: "A-Project/A.xcodeproj")!
+    
     class func unzipTestProjects() {
         let fileManager = NSFileManager.defaultManager()
         

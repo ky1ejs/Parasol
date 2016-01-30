@@ -34,17 +34,16 @@ class XcodeProjectTests: XCTestCase {
         
         // Assert that its not Test.xcodeproj file we made
         XCTAssertNotEqual(project?.url.lastPathComponent, testXcodeProjName)
-        XCTAssertEqual(project?.url.lastPathComponent, "CommandLineTest.xcodeproj")
-        XCTAssertEqual(project?.name, "CommandLineTest")
+        XCTAssertEqual(project?.url.lastPathComponent, TestXcodeProjects.mainProjectPath.lastPathComponent)
+        XCTAssertEqual(project?.name, (TestXcodeProjects.mainProjectPath.lastPathComponent! as NSString).stringByDeletingPathExtension)
         
         // Move A.xcodeproj
-        let aXcodeProjectName = "A.xcodeproj"
-        try! fileManager.moveItemAtPath("A Project/" + aXcodeProjectName, toPath: aXcodeProjectName)
+        try! fileManager.moveItemAtPath(TestXcodeProjects.secondProjectPath.path!, toPath: TestXcodeProjects.secondProjectPath.lastPathComponent!)
         
         // Make sure that A.xcodeproj is found before P
         let aProject = XcodeProject.findXcodeProjectInCurrentDirectory()
-        XCTAssertEqual(aXcodeProjectName, aProject?.url.lastPathComponent)
-        XCTAssertEqual("A", aProject?.name)
+        XCTAssertEqual(TestXcodeProjects.secondProjectPath.lastPathComponent, aProject?.url.lastPathComponent)
+        XCTAssertEqual(aProject?.name, (TestXcodeProjects.secondProjectPath.lastPathComponent! as NSString).stringByDeletingPathExtension)
     }
     
     func testTempDirSearch() {
