@@ -13,6 +13,7 @@
 		AF00320A1C412CC600158254 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0032091C412CC600158254 /* Target.swift */; };
 		AF00320B1C412CC600158254 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0032091C412CC600158254 /* Target.swift */; };
 		AF1DC4FD1C5AC376005FC72A /* XcodeBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1DC4FC1C5AC376005FC72A /* XcodeBuildTests.swift */; };
+		AF9CED451C5D285900972691 /* TestXcodeProjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9CED441C5D285900972691 /* TestXcodeProjects.swift */; };
 		AFC2948A1C50D66400777D6A /* XCRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDBFDC1C4F875600039CF8 /* XCRun.swift */; };
 		AFC2948B1C50D6F000777D6A /* CoverageAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDBFDA1C4F873900039CF8 /* CoverageAnalysis.swift */; };
 		AFCDBFDB1C4F873900039CF8 /* CoverageAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCDBFDA1C4F873900039CF8 /* CoverageAnalysis.swift */; };
@@ -48,6 +49,7 @@
 		AF0032061C412C7C00158254 /* XcodeBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeBuild.swift; sourceTree = "<group>"; };
 		AF0032091C412CC600158254 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		AF1DC4FC1C5AC376005FC72A /* XcodeBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeBuildTests.swift; sourceTree = "<group>"; };
+		AF9CED441C5D285900972691 /* TestXcodeProjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestXcodeProjects.swift; sourceTree = "<group>"; };
 		AFCDBFDA1C4F873900039CF8 /* CoverageAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverageAnalysis.swift; sourceTree = "<group>"; };
 		AFCDBFDC1C4F875600039CF8 /* XCRun.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCRun.swift; sourceTree = "<group>"; };
 		AFE7C7981C3493EB00A95B77 /* Parasol */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Parasol; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 			children = (
 				AFE7C7A81C34A85E00A95B77 /* XcodeProjectTests.swift */,
 				AF1DC4FC1C5AC376005FC72A /* XcodeBuildTests.swift */,
+				AF9CED441C5D285900972691 /* TestXcodeProjects.swift */,
 				AFE7C7AA1C34A85E00A95B77 /* Info.plist */,
 				AF0032041C3D1E8E00158254 /* TestXcodeProjects.zip */,
 				AFF8700E1C3B1F8200658254 /* Frameworks */,
@@ -271,6 +274,7 @@
 				AF00320B1C412CC600158254 /* Target.swift in Sources */,
 				AFC2948B1C50D6F000777D6A /* CoverageAnalysis.swift in Sources */,
 				AF1DC4FD1C5AC376005FC72A /* XcodeBuildTests.swift in Sources */,
+				AF9CED451C5D285900972691 /* TestXcodeProjects.swift in Sources */,
 				AFE7C7B51C34B65100A95B77 /* XcodeProject.swift in Sources */,
 				AFF0F2301C3992090083EDC2 /* CoverageReport.swift in Sources */,
 				AFC2948A1C50D66400777D6A /* XCRun.swift in Sources */,

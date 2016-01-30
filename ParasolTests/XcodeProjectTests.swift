@@ -14,22 +14,11 @@ class XcodeProjectTests: XCTestCase {
     override func setUp() {
         super.setUp()
         self.continueAfterFailure = true
-        
-        let fileManager = NSFileManager.defaultManager()
-        
-        // Unzip test Xcode project (Parasol.xcodeproj)
-        let zipPath = NSBundle(forClass: self.dynamicType).pathForResource("TestXcodeProjects", ofType: "zip")
-        try! SSZipArchive.unzipFileAtPath(zipPath, toDestination: fileManager.currentDirectoryPath, overwrite: false, password: nil)
-        
-        // Change working dir to see test Xcode project
-        XcodeProject.fileManager.changeCurrentDirectoryPath("TestXcodeProjects")
+        TestXcodeProjects.unzipTestProjects()
     }
     
     override func tearDown() {
-        let fileManager = NSFileManager.defaultManager()
-        let currentDirURL = NSURL(string: fileManager.currentDirectoryPath)!
-        fileManager.changeCurrentDirectoryPath(currentDirURL.URLByDeletingLastPathComponent!.path!)
-        try! fileManager.removeItemAtPath(currentDirURL.path!)
+        TestXcodeProjects.cleanUp()
         super.tearDown()
     }
     
