@@ -60,4 +60,12 @@ class XcodeProjectTests: XCTestCase {
     func testTargets() {
         XCTAssertNotNil(XcodeProject.findXcodeProjectInCurrentDirectory()?.targets)
     }
+    
+    func testFailableIntialiser() {
+        let fileManager = NSFileManager.defaultManager()
+        let fakeProjectPath = "Fake.xcodeproj"
+        fileManager.createFileAtPath(fakeProjectPath, contents: nil, attributes: nil)
+        XCTAssertNil(XcodeProject(url: NSURL(string: fakeProjectPath)!))
+        _ = try? fileManager.removeItemAtPath(fakeProjectPath)
+    }
 }
