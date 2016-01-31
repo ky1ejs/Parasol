@@ -47,6 +47,8 @@ class XcodeProjectTests: XCTestCase {
         let aProject = XcodeProject.findXcodeProjectInCurrentDirectory()
         XCTAssertEqual(TestXcodeProjects.secondProjectPath.lastPathComponent, aProject?.url.lastPathComponent)
         XCTAssertEqual(aProject?.name, (TestXcodeProjects.secondProjectPath.lastPathComponent! as NSString).stringByDeletingPathExtension)
+        
+        _ = try? fileManager.removeItemAtPath(testXcodeProjName)
     }
     
     func testTempDirSearch() {
