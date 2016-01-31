@@ -33,7 +33,7 @@ class XcodeBuildTests: XCTestCase {
         }
         XCTAssertNotNil(testTarget, "The test project does not have a Unit Test target")
         self.measureBlock { () -> Void in
-            project?.runTestsForScheme(project?.targets.first?.name)
+            project?.targets.first?.runTests()
         }
         let coverageDir = project?.targets.first?.codeCoverageDir
         XCTAssertNotNil(coverageDir)
