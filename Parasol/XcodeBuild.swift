@@ -37,7 +37,6 @@ struct XcodeBuild {
         }
         arguments += ["-enableCodeCoverage", "YES"]
         task.arguments = arguments
-        task.standardOutput = NSPipe()
         task.launch()
         print("testing...")
         task.waitUntilExit()
