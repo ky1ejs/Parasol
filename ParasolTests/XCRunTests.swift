@@ -23,9 +23,9 @@ class XCRunTests: XCTestCase {
     func testCoverageWithFormat() {
         let project = XcodeProject.findXcodeProjectInCurrentDirectory()
         XCTAssertNotNil(project?.targets.first)
-        let target = project?.targets.first!
-        target?.runTests()
-        let coverage = try? XCRun.coverageWithFormat(.Analysis, profdataPath: target!.codeCoverageProfdataPath!, executablePath: target!.executablePath!)
+        let target = project!.targets.first!
+        target.runTests()
+        let coverage = try? XCRun.coverageWithFormat(.Analysis, profdataPath: target.codeCoverageProfdataPath!, executablePath: target.executablePath!)
         XCTAssertNotNil(coverage)
     }
 }
