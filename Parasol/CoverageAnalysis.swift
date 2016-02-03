@@ -31,6 +31,7 @@ struct CoverageAnalysis {
                 path = line
                 lines = [String]()
             } else if whiteSpaceRegex.matchesInString(line, options: [], range: NSMakeRange(0, line.characters.count)).count > 0 {
+                path = path?.stringByReplacingOccurrencesOfString("\(XcodeProject.fileManager.currentDirectoryPath)/", withString: "")
                 if let path = path, file = CoverageFile(path: path, allLines: lines) {
                     files.append(file)
                 }
