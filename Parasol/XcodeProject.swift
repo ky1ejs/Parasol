@@ -14,7 +14,7 @@ struct XcodeProject {
     
     let url: NSURL
     let name: String
-    var projectFile: XCProjectFile { return try! XCProjectFile(xcodeprojURL: self.url) }
+    var projectFile: XCProjectFile
     
     init?(url: NSURL) {
         var projectName: String?
@@ -26,9 +26,10 @@ struct XcodeProject {
                 stop = true
             }
         }
-        if let projectName = projectName {
+        if let projectName = projectName, projectFile = try? XCProjectFile(xcodeprojURL: url) {
             self.url = url
             self.name = projectName
+            self.projectFile = projectFile
             return
         }
         return nil

@@ -13,6 +13,8 @@
 		AF00320A1C412CC600158254 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0032091C412CC600158254 /* Target.swift */; };
 		AF00320B1C412CC600158254 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0032091C412CC600158254 /* Target.swift */; };
 		AF1DC4FD1C5AC376005FC72A /* XcodeBuildTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1DC4FC1C5AC376005FC72A /* XcodeBuildTests.swift */; };
+		AF77C00C1C63495F003150D1 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77C00B1C63495F003150D1 /* ArrayExtensions.swift */; };
+		AF77C00D1C63495F003150D1 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF77C00B1C63495F003150D1 /* ArrayExtensions.swift */; };
 		AF9CED451C5D285900972691 /* TestXcodeProjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9CED441C5D285900972691 /* TestXcodeProjects.swift */; };
 		AF9CED471C5D3C4400972691 /* TargetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9CED461C5D3C4400972691 /* TargetTests.swift */; };
 		AF9CED4C1C5F54C000972691 /* XCRunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9CED4B1C5F54C000972691 /* XCRunTests.swift */; };
@@ -53,6 +55,7 @@
 		AF0032061C412C7C00158254 /* XcodeBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeBuild.swift; sourceTree = "<group>"; };
 		AF0032091C412CC600158254 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		AF1DC4FC1C5AC376005FC72A /* XcodeBuildTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeBuildTests.swift; sourceTree = "<group>"; };
+		AF77C00B1C63495F003150D1 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		AF9CED441C5D285900972691 /* TestXcodeProjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestXcodeProjects.swift; sourceTree = "<group>"; };
 		AF9CED461C5D3C4400972691 /* TargetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetTests.swift; sourceTree = "<group>"; };
 		AF9CED4B1C5F54C000972691 /* XCRunTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCRunTests.swift; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 				AFF0F22E1C3992090083EDC2 /* CoverageReport.swift */,
 				AFCDBFDA1C4F873900039CF8 /* CoverageAnalysis.swift */,
 				AF9CED4D1C6207C000972691 /* JSON.swift */,
+				AF77C00B1C63495F003150D1 /* ArrayExtensions.swift */,
 			);
 			path = Parasol;
 			sourceTree = "<group>";
@@ -274,6 +278,7 @@
 				AF0032071C412C7C00158254 /* XcodeBuild.swift in Sources */,
 				AFE7C7B41C34B65100A95B77 /* XcodeProject.swift in Sources */,
 				AF00320A1C412CC600158254 /* Target.swift in Sources */,
+				AF77C00C1C63495F003150D1 /* ArrayExtensions.swift in Sources */,
 				AF9CED4E1C6207C000972691 /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +296,7 @@
 				AFE7C7B51C34B65100A95B77 /* XcodeProject.swift in Sources */,
 				AFF0F2301C3992090083EDC2 /* CoverageReport.swift in Sources */,
 				AFC2948A1C50D66400777D6A /* XCRun.swift in Sources */,
+				AF77C00D1C63495F003150D1 /* ArrayExtensions.swift in Sources */,
 				AFE7C7B01C34B26A00A95B77 /* main.swift in Sources */,
 				AF0032081C412C7C00158254 /* XcodeBuild.swift in Sources */,
 				AF9CED471C5D3C4400972691 /* TargetTests.swift in Sources */,
