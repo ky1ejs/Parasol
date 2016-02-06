@@ -89,7 +89,7 @@ struct CoverageFile: JSONEncodeable {
         var json = [String : AnyObject]()
         json["path"]            = self.path
         json["coverage"]        = self.coverage
-        json["testable_lines"]  = self.testedLines.count
+        json["testable_lines"]  = self.testableLines.count
         json["tested_lines"]    = self.testedLines.count
         return json
     }
